@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.quartz.Scheduler;
 import org.quartz.ee.servlet.QuartzInitializerListener;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,10 @@ public class SchedulerConfig {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setQuartzProperties(quartzProperties());
         return factory;
+        
+        /*StdSchedulerFactory factory = new StdSchedulerFactory();
+        factory.initialize(quartzProperties());
+        return factory;*/
     }
 
     @Bean
