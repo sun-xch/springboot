@@ -8,4 +8,7 @@ spring:
 mybatis: 
   mapper-locations:
   - classpath:com/example/test/quartz/mapper/*.xml
-  type-aliases-package: com.example.test.quartz.entity
+  - classpath:com/example/test/redis/mapper/*.xml
+  type-aliases-package:
+  - com.example.test.quartz.entity
+  - com.example.test.redis.entity

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Demo</title>
+	<!-- import Vue.js -->
+	<script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+	<!-- import stylesheet -->
+	<link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+	<!-- import iView -->
+	<script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+	
+	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+
+	<div id="app">
+	    
+	    <i-button type="info" @click="doSearch">Info</i-button>
+	    
+	    <i-table border :columns="columns1" :data="data1"></i-table>
+	    
+	    
+	</div>
+	
+	<script>
+		new Vue({
+	        el: '#app',
+	        data: {
+	        	columns1: [
+                    {
+                        title: 'Name',
+                        key: 'name'
+                    },
+                    {
+                        title: 'Address',
+                        key: 'address'
+                    },
+                    {
+                        title: 'Skill',
+                        key: 'skill'
+                    }
+                ],
+                data1:[]
+
+	        },
+	        mounted:function(){
+        		this.doSearch();
+        	},
+	        methods: {
+	     
+	        	doSearch:function(){
+                    //发送get请求
+                    this.$http.get('/user/list').then(function(res){
+                    	this.data1 = res.body;
+                    },function(){
+                        console.log('请求失败处理');
+                    });
+	        	}
+	        
+	        }
+	    })
+	</script>  
+	
+</body>
+</html>

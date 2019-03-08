@@ -85,13 +85,14 @@ public class RedisConfig extends CachingConfigurerSupport {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-     // 使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
+        //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
         Jackson2JsonRedisSerializer<JSON> serializer = new Jackson2JsonRedisSerializer<JSON>(JSON.class);
+        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
         serializer.setObjectMapper(mapper);
-        template.setValueSerializer(serializer);
-        template.setHashValueSerializer(serializer);
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(stringSerializer);
+        template.setKeySerializer(stringSerializer);
+        template.setHashValueSerializer(stringSerializer);
+        template.setHashKeySerializer(stringSerializer);
         template.afterPropertiesSet();
         return template;
     }
